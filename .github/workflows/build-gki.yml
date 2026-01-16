@@ -1,0 +1,41 @@
+name: Build GKI A13 5.15 SUSFS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            git curl wget unzip bc \
+            build-essential flex bison \
+            libssl-dev libelf-dev libncurses-dev \
+            python3 python3-pip \
+            clang lld \
+            gcc-aarch64-linux-gnu \
+            binutils-aarch64-linux-gnu
+
+      - name: Make script executable
+        run: |
+          chmod +x GKI/build_kernel_a13_5.15-lts_susfs_release/build_kernel_a13_5.15-lts_susfs_release.sh
+
+      - name: Run kernel build
+        run: |
+          cd GKI/build_kernel_a13_5.15-lts_susfs_release
+          bash build_kernel_a13_5.15-lts_susfs_release.sh
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel-output
+          path: |
+            **/Image*
+            **/boot.img
