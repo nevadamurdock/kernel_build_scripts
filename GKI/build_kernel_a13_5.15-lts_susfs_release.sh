@@ -53,7 +53,7 @@ patch -p1 < 69_hide_lineage.patch
 #build Kernel
 cd ..
 sed -i '2s/check_defconfig//' ./common/build.config.gki
-sed -i "s/dirty/'Wild-Exclusive+'/g" ./common/scripts/setlocalversion
+sed -i "s/dirty/'GusKernel'/g" ./common/scripts/setlocalversion
 echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
 echo "CONFIG_KSU_SUSFS=y" >> ./common/arch/arm64/configs/gki_defconfig
 echo "CONFIG_KSU_SUSFS_SUS_PATH=y" >> ./common/arch/arm64/configs/gki_defconfig
@@ -84,7 +84,7 @@ zip -r "../$ZIP_NAME" ./*
 cd ..
 
 # GitHub Release using gh CLI
-REPO_OWNER="TheWildJames"         # Replace with your GitHub username
+REPO_OWNER="nevadamurdock"         # Replace with your GitHub username
 REPO_NAME="android13-5.15"  # Replace with your repository name
 TAG_NAME="v$(date +'%Y.%m.%d-%H%M%S')"   # Unique tag with timestamp to ensure multiple releases on the same day
 RELEASE_NAME="GKI-android13-5.15-lts With KernelSU & SUSFS"  # Updated release name
