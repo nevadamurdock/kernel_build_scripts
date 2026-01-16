@@ -25,11 +25,11 @@ jobs:
 
       - name: Make script executable
         run: |
-          chmod +x GKI/build_kernel_a13_5.15-lts_susfs_release/build_kernel_a13_5.15-lts_susfs_release.sh
+          chmod +x GKI/build_kernel_a13_5.15-lts_susfs_release.sh
 
       - name: Run kernel build
         run: |
-          cd GKI/build_kernel_a13_5.15-lts_susfs_release
+          cd GKI
           bash build_kernel_a13_5.15-lts_susfs_release.sh
 
       - name: Upload build output
